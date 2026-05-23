@@ -1,9 +1,18 @@
 {
   "name": "@svelte-devtools/vite-plugin",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Vite plugin that adds a development overlay for inspecting Svelte 5 and SvelteKit apps",
   "type": "module",
-  "keywords": ["svelte", "svelte5", "sveltekit", "devtools", "vite", "vite-plugin", "debug", "inspector"],
+  "keywords": [
+    "svelte",
+    "svelte5",
+    "sveltekit",
+    "devtools",
+    "vite",
+    "vite-plugin",
+    "debug",
+    "inspector"
+  ],
   "author": "Chris Lentz",
   "license": "MIT",
   "repository": {
@@ -19,7 +28,9 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc --project tsconfig.build.json && cp ../overlay/dist/overlay.js dist/overlay.js",
     "prepublishOnly": "npm run build"
