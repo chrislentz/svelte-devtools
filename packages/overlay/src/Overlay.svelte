@@ -1,14 +1,44 @@
 <script lang="ts">
   import Panel from './Panel.svelte';
 
-  let isOpen    = $state(localStorage.getItem('sdt:open') === 'true');
-  let height    = $state(parseInt(localStorage.getItem('sdt:height') ?? '320', 10));
-  let width     = $state(parseInt(localStorage.getItem('sdt:width') ?? '380', 10));
-  let position  = $state<'bottom' | 'right'>(
-    (localStorage.getItem('sdt:position') as 'bottom' | 'right') ?? 'bottom'
-  );
+  type Position = 'bottom' | 'right';
 
-  $effect(() => { localStorage.setItem('sdt:open', String(isOpen)); });
+  const MIN_SIZE = 180;
+  const MAX_SIZE = 900;
+
+  function storageGet(key: string): string | null {
+    try {
+      return localStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  }
+
+  function storageSet(key: string, value: string) {
+    try {
+      localStorage.setItem(key, value);
+    } catch {
+      // Ignore unavailable storage; the panel still works without persistence.
+    }
+  }
+
+  function storedNumber(key: string, fallback: number) {
+    const value = Number.parseInt(storageGet(key) ?? '', 10);
+    if (!Number.isFinite(value)) return fallback;
+    return Math.min(MAX_SIZE, Math.max(MIN_SIZE, value));
+  }
+
+  function storedPosition(): Position {
+    const value = storageGet('sdt:position');
+    return value === 'right' || value === 'bottom' ? value : 'bottom';
+  }
+
+  let isOpen    = $state(storageGet('sdt:open') === 'true');
+  let height    = $state(storedNumber('sdt:height', 320));
+  let width     = $state(storedNumber('sdt:width', 380));
+  let position  = $state<Position>(storedPosition());
+
+  $effect(() => { storageSet('sdt:open', String(isOpen)); });
 
   $effect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -24,16 +54,16 @@
   function onResize(v: number) {
     if (position === 'bottom') {
       height = v;
-      localStorage.setItem('sdt:height', String(v));
+      storageSet('sdt:height', String(v));
     } else {
       width = v;
-      localStorage.setItem('sdt:width', String(v));
+      storageSet('sdt:width', String(v));
     }
   }
 
-  function onPositionChange(p: 'bottom' | 'right') {
+  function onPositionChange(p: Position) {
     position = p;
-    localStorage.setItem('sdt:position', p);
+    storageSet('sdt:position', p);
   }
 </script>
 
@@ -63,6 +93,7 @@
   >
     <Panel
       {height}
+      {width}
       {position}
       onClose={() => (isOpen = false)}
       {onResize}

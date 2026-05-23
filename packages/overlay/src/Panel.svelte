@@ -5,12 +5,14 @@
 
   let {
     height,
+    width,
     position,
     onClose,
     onResize,
     onPositionChange,
   }: {
     height: number;
+    width: number;
     position: 'bottom' | 'right';
     onClose: () => void;
     onResize: (v: number) => void;
@@ -19,9 +21,28 @@
 
   type Tab = 'routes' | 'components' | 'state';
 
-  let activeTab = $state<Tab>(
-    (localStorage.getItem('sdt:tab') as Tab) ?? 'routes'
-  );
+  function storageGet(key: string): string | null {
+    try {
+      return localStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  }
+
+  function storageSet(key: string, value: string) {
+    try {
+      localStorage.setItem(key, value);
+    } catch {
+      // Ignore unavailable storage; the panel still works without persistence.
+    }
+  }
+
+  function storedTab(): Tab {
+    const value = storageGet('sdt:tab');
+    return value === 'routes' || value === 'components' || value === 'state' ? value : 'routes';
+  }
+
+  let activeTab = $state<Tab>(storedTab());
 
   const tabs: { id: Tab; icon: string; label: string }[] = [
     { id: 'routes',     icon: '⟨/⟩', label: 'Routes'     },
@@ -31,12 +52,12 @@
 
   function selectTab(id: Tab) {
     activeTab = id;
-    localStorage.setItem('sdt:tab', id);
+    storageSet('sdt:tab', id);
   }
 
   function startResize(e: MouseEvent) {
     const startVal = position === 'bottom' ? e.clientY : e.clientX;
-    const startSize = height;
+    const startSize = position === 'bottom' ? height : width;
     e.preventDefault();
 
     const onMove = (e: MouseEvent) => {
@@ -72,8 +93,8 @@
         if (e.key === 'ArrowUp')   onResize(Math.min(900, height + 20));
         if (e.key === 'ArrowDown') onResize(Math.max(180, height - 20));
       } else {
-        if (e.key === 'ArrowLeft')  onResize(Math.min(900, height + 20));
-        if (e.key === 'ArrowRight') onResize(Math.max(180, height - 20));
+        if (e.key === 'ArrowLeft')  onResize(Math.min(900, width + 20));
+        if (e.key === 'ArrowRight') onResize(Math.max(180, width - 20));
       }
     }}
     aria-label="Resize panel"

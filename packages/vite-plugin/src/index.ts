@@ -15,6 +15,25 @@ export interface SvelteDevtoolsOptions {
   allowedHosts?: string[];
 }
 
+function normalizeHost(host: string | undefined) {
+  return host?.split(':')[0]?.toLowerCase() ?? '';
+}
+
+function isAllowedHost(host: string | undefined, allowedHosts: string[] | undefined) {
+  if (!allowedHosts?.length) return true;
+  const hostname = normalizeHost(host);
+  const hostWithPort = host?.toLowerCase() ?? '';
+
+  return allowedHosts.some((allowedHost) => {
+    const allowed = allowedHost.toLowerCase();
+    return allowed === '*' || allowed === hostname || allowed === hostWithPort;
+  });
+}
+
+function isDevtoolsVirtualRequest(url: string | undefined) {
+  return Boolean(url?.includes(`/@id/${VIRTUAL_ID}`));
+}
+
 /**
  * Vite plugin for Svelte DevTools.
  *
@@ -24,9 +43,10 @@ export interface SvelteDevtoolsOptions {
  *   import { svelteDevtoolsHandle } from '@svelte-devtools/kit';
  *   export const handle = sequence(svelteDevtoolsHandle);
  */
-export function svelteDevtools(_options: SvelteDevtoolsOptions = {}): Plugin {
+export function svelteDevtools(options: SvelteDevtoolsOptions = {}): Plugin {
   let isSvelteKit = false;
   let base = '/';
+  let shouldInjectForCurrentRequest = true;
 
   return {
     name: 'vite-plugin-svelte-devtools',
@@ -40,6 +60,19 @@ export function svelteDevtools(_options: SvelteDevtoolsOptions = {}): Plugin {
     },
 
     configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        const allowed = isAllowedHost(req.headers.host, options.allowedHosts);
+        shouldInjectForCurrentRequest = allowed;
+
+        if (!allowed && isDevtoolsVirtualRequest(req.url)) {
+          res.statusCode = 403;
+          res.end('[svelte-devtools] host is not allowed');
+          return;
+        }
+
+        next();
+      });
+
       const overlayFile = resolve(overlayDir, 'overlay.js');
       server.watcher.add(overlayFile);
       server.watcher.on('change', (file) => {
@@ -106,6 +139,7 @@ export function svelteDevtools(_options: SvelteDevtoolsOptions = {}): Plugin {
       order: 'post',
       handler() {
         if (isSvelteKit) return []; // handled by the SvelteKit hook
+        if (!shouldInjectForCurrentRequest) return [];
         return [
           {
             tag: 'script',
