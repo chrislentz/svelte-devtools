@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 import type { Plugin } from 'vite';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
-const overlayDir = resolve(__dirname, '..', '..', 'overlay', 'dist');
+const overlayPath = resolve(__dirname, 'overlay.js');
 
 const VIRTUAL_ID         = 'virtual:svelte-devtools';
 const RESOLVED_ID        = '\0virtual:svelte-devtools';
@@ -73,7 +73,7 @@ export function svelteDevtools(options: SvelteDevtoolsOptions = {}): Plugin {
         next();
       });
 
-      const overlayFile = resolve(overlayDir, 'overlay.js');
+      const overlayFile = overlayPath;
       server.watcher.add(overlayFile);
       server.watcher.on('change', (file) => {
         if (file !== overlayFile) return;
@@ -93,11 +93,10 @@ export function svelteDevtools(options: SvelteDevtoolsOptions = {}): Plugin {
 
       // ── Pre-built overlay Svelte 5 bundle ─────────────────────────────────
       if (id === OVERLAY_RESOLVED) {
-        const p = resolve(overlayDir, 'overlay.js');
-        if (!existsSync(p)) {
+        if (!existsSync(overlayPath)) {
           return 'console.warn("[svelte-devtools] overlay.js missing — run: npm run build:overlay")';
         }
-        return readFileSync(p, 'utf-8');
+        return readFileSync(overlayPath, 'utf-8');
       }
 
       // ── Bootstrap module ─────────────────────────────────────────────────
