@@ -23,7 +23,7 @@
 <div class="hero">
   <h1>Svelte <span style="color:#FF3E00">DevTools</span> Playground</h1>
   <p class="sub">
-    Open the devtools panel below (or press <kbd>⌘⇧D</kbd>) to inspect this page.
+    Open the devtools panel below (or press <span class="shortcut"><kbd>⇧</kbd><kbd>⌥</kbd><kbd>D</kbd></span>) to inspect this page.
   </p>
 </div>
 
@@ -119,14 +119,25 @@
     margin: 0;
   }
 
+  .shortcut {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    vertical-align: middle;
+  }
+
   kbd {
     background: #2d3148;
-    color: #e2e8f0;
-    padding: 2px 7px;
-    border-radius: 4px;
-    font-family: monospace;
-    font-size: 12px;
+    color: #cdd6f4;
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
     border: 1px solid #45475a;
+    border-bottom-width: 3px;
+    box-shadow: 0 1px 0 #0f1117;
+    line-height: 1.6;
   }
 
   .cards {

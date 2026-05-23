@@ -150,7 +150,7 @@
       {/if}
     </button>
 
-    <button class="sdt-close" onclick={onClose} title="Close (⌘⇧D)">✕</button>
+    <button class="sdt-close" onclick={onClose} title="Close (⇧⌥D)">✕</button>
   </div>
 
   <!-- Tab content -->

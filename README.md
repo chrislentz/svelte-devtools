@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/@svelte-devtools/vite-plugin)](https://www.npmjs.com/package/@svelte-devtools/vite-plugin)
 [![license](https://img.shields.io/npm/l/@svelte-devtools/vite-plugin)](./LICENSE)
 
-A development-only panel for **Svelte 5** and **SvelteKit** apps. Inspect routes, browse the component tree, and watch reactive state — right in the browser. Press `⌘⇧D` (or `Ctrl⇧D`) to open.
+A development-only panel for **Svelte 5** and **SvelteKit** apps. Inspect routes, browse the component tree, and watch reactive state — right in the browser. Press `⇧⌥D` (Shift+Alt+D) to open.
 
 > Only active during development (`apply: 'serve'`). Nothing is included in production builds.
 
@@ -13,7 +13,7 @@ A development-only panel for **Svelte 5** and **SvelteKit** apps. Inspect routes
 - **Components tab** — live DOM tree with hover-to-highlight; click to expand/collapse subtrees
 - **State tab** — SvelteKit `page` store + any component runes state you opt in to expose
 - Resizable **bottom** or **right** drawer, position persisted across reloads
-- Keyboard shortcut `⌘⇧D` / `Ctrl⇧D` to toggle open/close
+- Keyboard shortcut `⇧⌥D` / `Shift+Alt+D` to toggle open/close
 
 ## Installation
 
@@ -93,7 +93,7 @@ svelteDevtools({
 
 | Shortcut | Action |
 |---|---|
-| `⌘⇧D` / `Ctrl⇧D` | Toggle the devtools panel |
+| `⇧⌥D` / `Shift+Alt+D` | Toggle the devtools panel |
 
 The toggle button is always visible in the bottom-right corner of the page.
 

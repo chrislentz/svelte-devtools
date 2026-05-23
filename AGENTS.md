@@ -71,7 +71,7 @@ The panel has two positions, toggled by the position button in the header (persi
 - **Bottom drawer** (default) — full header with logo text and labeled tabs; height resizable by dragging the top edge
 - **Right drawer** — compact icon-only header (logo text + tab labels hidden to fit); width resizable by dragging the left edge
 
-The header adapts automatically: when `position === 'right'`, `Panel.svelte` hides the "Svelte DevTools" wordmark and tab label text, showing only the SVG logo and tab icons. Toggle between modes with the layout icon in the header, or press ⌘⇧D to open/close.
+The header adapts automatically: when `position === 'right'`, `Panel.svelte` hides the "Svelte DevTools" wordmark and tab label text, showing only the SVG logo and tab icons. Toggle between modes with the layout icon in the header, or press ⇧⌥D to open/close.
 
 ## CSS rules
 
@@ -96,7 +96,7 @@ The header adapts automatically: when `position === 'right'`, `Panel.svelte` hid
 | `packages/kit/src/index.ts` | SvelteKit `transformPageChunk` handle |
 | `packages/overlay/src/app.ts` | Overlay entry — mounts Svelte component |
 | `packages/overlay/src/styles.ts` | All CSS as a JS string |
-| `packages/overlay/src/Overlay.svelte` | Toggle button, keyboard shortcut (⌘⇧D), panel open/position/size state |
+| `packages/overlay/src/Overlay.svelte` | Toggle button, keyboard shortcut (⇧⌥D), panel open/position/size state |
 | `packages/overlay/src/Panel.svelte` | Adaptive header (bottom vs right mode), tab bar, resize handle, tab routing |
 | `packages/overlay/src/tabs/RoutesTab.svelte` | SvelteKit page/route inspector |
 | `packages/overlay/src/tabs/ComponentsTab.svelte` | DOM tree with hover-to-highlight |
