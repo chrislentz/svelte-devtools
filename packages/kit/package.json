@@ -1,10 +1,31 @@
 {
   "name": "@svelte-devtools/kit",
   "version": "0.1.0",
-  "private": true,
+  "description": "SvelteKit handle hook for injecting the Svelte DevTools overlay into SSR-rendered pages",
   "type": "module",
+  "keywords": ["svelte", "svelte5", "sveltekit", "devtools", "debug", "inspector"],
+  "author": "Chris Lentz",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chrislentz/svelte-devtools.git",
+    "directory": "packages/kit"
+  },
+  "homepage": "https://github.com/chrislentz/svelte-devtools#readme",
+  "bugs": "https://github.com/chrislentz/svelte-devtools/issues",
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "prepublishOnly": "pnpm build"
+  },
+  "peerDependencies": {
+    "@sveltejs/kit": ">=2.0.0"
   },
   "devDependencies": {
     "@sveltejs/kit": "^2.0.0",
