@@ -8,7 +8,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/chrislentz/svelte-devtools.git",
+    "url": "git+https://github.com/chrislentz/svelte-devtools.git",
     "directory": "packages/vite-plugin"
   },
   "homepage": "https://github.com/chrislentz/svelte-devtools#readme",
