@@ -53,10 +53,8 @@
         key: `node-${keyCounter++}`,
       });
 
-      if (depth < 8) {
-        for (const child of el.children) {
-          walk(child, depth + 1);
-        }
+      for (const child of el.children) {
+        walk(child, depth + 1);
       }
     }
 
