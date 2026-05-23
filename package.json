@@ -2,17 +2,18 @@
   "name": "svelte-devtools",
   "private": true,
   "type": "module",
+  "workspaces": ["packages/*", "playground"],
   "repository": {
     "type": "git",
     "url": "https://github.com/chrislentz/svelte-devtools.git"
   },
   "scripts": {
-    "setup": "pnpm install && pnpm build:overlay",
-    "build:overlay": "pnpm --filter @svelte-devtools/overlay build",
-    "dev:overlay": "pnpm --filter @svelte-devtools/overlay dev",
-    "build:packages": "pnpm --filter vite-plugin-svelte-devtools build && pnpm --filter @svelte-devtools/kit build",
-    "dev": "pnpm --filter playground dev",
-    "build": "pnpm --filter playground build"
+    "setup": "npm install && npm run build:overlay",
+    "build:overlay": "npm run build -w @svelte-devtools/overlay",
+    "dev:overlay": "npm run dev -w @svelte-devtools/overlay",
+    "build:packages": "npm run build -w vite-plugin-svelte-devtools && npm run build -w @svelte-devtools/kit",
+    "dev": "npm run dev -w playground",
+    "build": "npm run build -w playground"
   },
   "devDependencies": {
     "typescript": "^5.6.0"

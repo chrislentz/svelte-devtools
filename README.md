@@ -20,7 +20,7 @@ A development-only panel for **Svelte 5** and **SvelteKit** apps. Inspect routes
 ### SvelteKit
 
 ```bash
-pnpm add -D vite-plugin-svelte-devtools @svelte-devtools/kit
+npm install -D vite-plugin-svelte-devtools @svelte-devtools/kit
 ```
 
 **`vite.config.ts`**
@@ -49,7 +49,7 @@ export const handle = sequence(svelteDevtoolsHandle);
 ### Vite + Svelte (no SvelteKit)
 
 ```bash
-pnpm add -D vite-plugin-svelte-devtools
+npm install -D vite-plugin-svelte-devtools
 ```
 
 **`vite.config.ts`**
@@ -103,13 +103,13 @@ The toggle button is always visible in the bottom-right corner of the page.
 # 1. Clone and install
 git clone https://github.com/chrislentz/svelte-devtools.git
 cd svelte-devtools
-pnpm setup          # installs deps + builds the overlay bundle
+npm run setup          # installs deps + builds the overlay bundle
 
 # 2. Start the playground
-pnpm dev            # http://localhost:5173
+npm run dev            # http://localhost:5173
 
 # 3. Rebuild the overlay after making changes
-pnpm build:overlay  # or: pnpm dev:overlay (watch mode, use alongside pnpm dev)
+npm run build:overlay  # or: npm run dev:overlay (watch mode, use alongside npm run dev)
 ```
 
 ### Monorepo structure

@@ -14,23 +14,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: pnpm
+          cache: npm
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm ci
 
       - name: Build overlay
-        run: pnpm build:overlay
+        run: npm run build:overlay
 
       - name: Build packages
-        run: pnpm build:packages
+        run: npm run build:packages
 
       - name: Type-check playground
-        run: pnpm --filter playground exec tsc --noEmit
+        run: npm run -w playground exec tsc --noEmit

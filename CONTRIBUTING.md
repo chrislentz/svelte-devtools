@@ -7,7 +7,7 @@ Thanks for your interest in contributing to Svelte DevTools!
 ```bash
 git clone https://github.com/chrislentz/svelte-devtools.git
 cd svelte-devtools
-pnpm setup   # installs deps and builds the overlay
+npm run setup   # installs deps and builds the overlay
 ```
 
 ## Development workflow
@@ -15,13 +15,13 @@ pnpm setup   # installs deps and builds the overlay
 Start the playground:
 
 ```bash
-pnpm dev          # SvelteKit playground at localhost:5173
+npm run dev          # SvelteKit playground at localhost:5173
 ```
 
 In a second terminal, watch-build the overlay UI:
 
 ```bash
-pnpm dev:overlay  # rebuilds overlay.js on save, triggers browser reload
+npm run dev:overlay  # rebuilds overlay.js on save, triggers browser reload
 ```
 
 Changes to `packages/vite-plugin` or `packages/kit` take effect immediately (they're loaded as TypeScript source in dev).
@@ -44,7 +44,7 @@ All styles for the panel live in `packages/overlay/src/styles.ts` as a plain str
 ## Submitting changes
 
 1. Fork the repo and create a branch: `git checkout -b my-feature`
-2. Make your changes, run `pnpm build:overlay` to verify the bundle builds cleanly
+2. Make your changes, run `npm run build:overlay` to verify the bundle builds cleanly
 3. Open a pull request with a clear description of what changed and why
 
 ## Reporting bugs

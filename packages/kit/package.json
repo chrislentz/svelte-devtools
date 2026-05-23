@@ -22,7 +22,7 @@
   "files": ["dist"],
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
-    "prepublishOnly": "pnpm build"
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "@sveltejs/kit": ">=2.0.0"

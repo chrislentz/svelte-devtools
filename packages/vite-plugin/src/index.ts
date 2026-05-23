@@ -95,7 +95,7 @@ export function svelteDevtools(options: SvelteDevtoolsOptions = {}): Plugin {
       if (id === OVERLAY_RESOLVED) {
         const p = resolve(overlayDir, 'overlay.js');
         if (!existsSync(p)) {
-          return 'console.warn("[svelte-devtools] overlay.js missing — run: pnpm build:overlay")';
+          return 'console.warn("[svelte-devtools] overlay.js missing — run: npm run build:overlay")';
         }
         return readFileSync(p, 'utf-8');
       }

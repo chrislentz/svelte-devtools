@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "playground",
-      "runtimeExecutable": "/opt/homebrew/bin/pnpm",
-      "runtimeArgs": ["dev"],
+      "runtimeExecutable": "/opt/homebrew/bin/npm",
+      "runtimeArgs": ["run", "dev"],
       "port": 5173
     }
   ]

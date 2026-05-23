@@ -15,10 +15,10 @@ playground/      — SvelteKit dev sandbox
 ## Commands
 
 ```bash
-pnpm setup          # install deps + build overlay (run once after clone)
-pnpm build:overlay  # rebuild the overlay UI bundle
-pnpm dev            # start playground at localhost:5173
-pnpm dev:overlay    # watch-build the overlay (use alongside pnpm dev)
+npm run setup          # install deps + build overlay (run once after clone)
+npm run build:overlay  # rebuild the overlay UI bundle
+npm run dev            # start playground at localhost:5173
+npm run dev:overlay    # watch-build the overlay (use alongside npm run dev)
 ```
 
 ## Architecture
@@ -28,7 +28,7 @@ pnpm dev:overlay    # watch-build the overlay (use alongside pnpm dev)
 - `virtual:svelte-devtools` — bootstrap module: initializes `window.__sdt`, subscribes to `$app/stores` on SvelteKit
 - `virtual:svelte-devtools-overlay` — serves the pre-built `packages/overlay/dist/overlay.js` verbatim
 
-The vite plugin watches `overlay.js` on disk. When `pnpm build:overlay` completes it invalidates the Vite module graph and triggers a full page reload automatically.
+The vite plugin watches `overlay.js` on disk. When `npm run build:overlay` completes it invalidates the Vite module graph and triggers a full page reload automatically.
 
 ### Why `packages/kit` exists
 
