@@ -49,7 +49,7 @@ export function svelteDevtools(options: SvelteDevtoolsOptions = {}): Plugin {
   let shouldInjectForCurrentRequest = true;
 
   return {
-    name: 'vite-plugin-svelte-devtools',
+    name: '@svelte-devtools/vite-plugin',
     apply: 'serve',
 
     configResolved(config) {

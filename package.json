@@ -11,7 +11,7 @@
     "setup": "npm install && npm run build:overlay",
     "build:overlay": "npm run build -w @svelte-devtools/overlay",
     "dev:overlay": "npm run dev -w @svelte-devtools/overlay",
-    "build:packages": "npm run build -w vite-plugin-svelte-devtools && npm run build -w @svelte-devtools/kit",
+    "build:packages": "npm run build -w @svelte-devtools/vite-plugin && npm run build -w @svelte-devtools/kit",
     "dev": "npm run dev -w playground",
     "build": "npm run build -w playground"
   },

@@ -1,7 +1,7 @@
 # Svelte DevTools
 
-[![npm version](https://img.shields.io/npm/v/vite-plugin-svelte-devtools)](https://www.npmjs.com/package/vite-plugin-svelte-devtools)
-[![license](https://img.shields.io/npm/l/vite-plugin-svelte-devtools)](./LICENSE)
+[![npm version](https://img.shields.io/npm/v/@svelte-devtools/vite-plugin)](https://www.npmjs.com/package/@svelte-devtools/vite-plugin)
+[![license](https://img.shields.io/npm/l/@svelte-devtools/vite-plugin)](./LICENSE)
 
 A development-only panel for **Svelte 5** and **SvelteKit** apps. Inspect routes, browse the component tree, and watch reactive state — right in the browser. Press `⌘⇧D` (or `Ctrl⇧D`) to open.
 
@@ -20,7 +20,7 @@ A development-only panel for **Svelte 5** and **SvelteKit** apps. Inspect routes
 ### SvelteKit
 
 ```bash
-npm install -D vite-plugin-svelte-devtools @svelte-devtools/kit
+npm install -D @svelte-devtools/vite-plugin @svelte-devtools/kit
 ```
 
 **`vite.config.ts`**
@@ -28,7 +28,7 @@ npm install -D vite-plugin-svelte-devtools @svelte-devtools/kit
 ```ts
 import { defineConfig } from 'vite';
 import { sveltekit } from '@sveltejs/kit/vite';
-import { svelteDevtools } from 'vite-plugin-svelte-devtools';
+import { svelteDevtools } from '@svelte-devtools/vite-plugin';
 
 export default defineConfig({
   plugins: [sveltekit(), svelteDevtools()],
@@ -49,7 +49,7 @@ export const handle = sequence(svelteDevtoolsHandle);
 ### Vite + Svelte (no SvelteKit)
 
 ```bash
-npm install -D vite-plugin-svelte-devtools
+npm install -D @svelte-devtools/vite-plugin
 ```
 
 **`vite.config.ts`**
@@ -57,7 +57,7 @@ npm install -D vite-plugin-svelte-devtools
 ```ts
 import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
-import { svelteDevtools } from 'vite-plugin-svelte-devtools';
+import { svelteDevtools } from '@svelte-devtools/vite-plugin';
 
 export default defineConfig({
   plugins: [svelte(), svelteDevtools()],
@@ -117,7 +117,7 @@ npm run build:overlay  # or: npm run dev:overlay (watch mode, use alongside npm 
 ```
 packages/
   overlay/       — Svelte 5 panel UI (pre-built to dist/overlay.js, not published)
-  vite-plugin/   — published as vite-plugin-svelte-devtools
+  vite-plugin/   — published as @svelte-devtools/vite-plugin
   kit/           — published as @svelte-devtools/kit
 playground/      — SvelteKit sandbox for manual testing
 ```

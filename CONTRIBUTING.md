@@ -31,7 +31,7 @@ Changes to `packages/vite-plugin` or `packages/kit` take effect immediately (the
 | Directory | Description |
 |---|---|
 | `packages/overlay/` | Svelte 5 devtools panel UI — pre-built to `dist/overlay.js` |
-| `packages/vite-plugin/` | Vite plugin (`vite-plugin-svelte-devtools`) |
+| `packages/vite-plugin/` | Vite plugin (`@svelte-devtools/vite-plugin`) |
 | `packages/kit/` | SvelteKit handle hook (`@svelte-devtools/kit`) |
 | `playground/` | SvelteKit test app |
 

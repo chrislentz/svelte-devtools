@@ -1,5 +1,5 @@
 {
-  "name": "vite-plugin-svelte-devtools",
+  "name": "@svelte-devtools/vite-plugin",
   "version": "0.1.0",
   "description": "Vite plugin that adds a development overlay for inspecting Svelte 5 and SvelteKit apps",
   "type": "module",
