@@ -4,7 +4,11 @@ import { fileURLToPath } from 'url';
 import type { Plugin } from 'vite';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
-const overlayPath = resolve(__dirname, 'overlay.js');
+// npm install: overlay.js is copied alongside dist/index.js
+// monorepo dev: TypeScript source is loaded from src/, overlay lives in ../../overlay/dist/
+const overlayPath = existsSync(resolve(__dirname, 'overlay.js'))
+  ? resolve(__dirname, 'overlay.js')
+  : resolve(__dirname, '..', '..', 'overlay', 'dist', 'overlay.js');
 
 const VIRTUAL_ID         = 'virtual:svelte-devtools';
 const RESOLVED_ID        = '\0virtual:svelte-devtools';

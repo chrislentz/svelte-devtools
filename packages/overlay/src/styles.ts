@@ -27,16 +27,19 @@ export const CSS = `
   .sdt-toggle {
     position: absolute;
     bottom: 20px;
-    right: 20px;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: fit-content;
+    height: 36px;
+    padding: 0 16px 0 10px;
+    border-radius: 999px;
     background: white;
     border: none;
     cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 8px;
     pointer-events: auto;
     box-shadow:
       0 0 0 1px rgba(0 0 0 / 0.08),
@@ -45,14 +48,19 @@ export const CSS = `
     transition: transform 0.15s ease, box-shadow 0.15s ease;
     outline: none;
     color: #1e1e2e;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
   }
 
   .sdt-toggle:hover {
-    transform: scale(1.08);
-    box-shadow: 0 6px 24px rgba(0 0 0 / 0.45);
+    transform: scale(1.05);
+    box-shadow: 0 6px 24px rgba(0 0 0 / 0.35);
   }
 
-  .sdt-toggle:active { transform: scale(0.96); }
+  .sdt-toggle:active { transform: scale(0.97); }
 
   .sdt-toggle.sdt-toggle--open {
     background: #1e1e2e;
