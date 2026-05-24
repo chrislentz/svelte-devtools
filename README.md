@@ -1,19 +1,21 @@
 # Svelte DevTools
 
-[![npm version](https://img.shields.io/npm/v/@svelte-devtools/vite-plugin)](https://www.npmjs.com/package/@svelte-devtools/vite-plugin)
+[![npm version](https://img.shields.io/npm/v/@svelte-devtools/vite-plugin?label=%40svelte-devtools%2Fvite-plugin)](https://www.npmjs.com/package/@svelte-devtools/vite-plugin)
+[![npm version](https://img.shields.io/npm/v/@svelte-devtools/kit?label=%40svelte-devtools%2Fkit)](https://www.npmjs.com/package/@svelte-devtools/kit)
+[![CI](https://github.com/chrislentz/svelte-devtools/actions/workflows/ci.yml/badge.svg)](https://github.com/chrislentz/svelte-devtools/actions/workflows/ci.yml)
 [![license](https://img.shields.io/npm/l/@svelte-devtools/vite-plugin)](./LICENSE)
 
-A development-only panel for **Svelte 5** and **SvelteKit** apps. Inspect routes, browse the component tree, and watch reactive state — right in the browser. Press `⇧⌥D` (Shift+Alt+D) to open.
+A zero-config Vite plugin that injects a floating devtools panel into your Svelte 5 or SvelteKit app during development. Inspect routes, hover-highlight components in the DOM tree, and track runes state — all without leaving the browser. Drop-in setup, nothing included in production builds.
 
-> Only active during development (`apply: 'serve'`). Nothing is included in production builds.
+![Svelte DevTools showing the Routes tab on a SvelteKit app](.github/screenshot.png)
 
 ## Features
 
-- **Routes tab** — current route ID, URL, status code, route params, and page data from `load()`
-- **Components tab** — live DOM tree with hover-to-highlight; click to expand/collapse subtrees
-- **State tab** — SvelteKit `page` store + any component runes state you opt in to expose
+- **Routes Tab** — current route ID, URL, status code, route params, and page data from `load()`
+- **Components Tab** — live DOM tree with hover-to-highlight; click to expand/collapse subtrees
+- **State Tab** — SvelteKit `page` store + any component runes state you opt in to expose
 - Resizable **bottom** or **right** drawer, position persisted across reloads
-- Keyboard shortcut `⇧⌥D` / `Shift+Alt+D` to toggle open/close
+- Keyboard shortcut `⇧ + ⌥ + D` / `Shift + Alt + D` to toggle open/close
 
 ## Installation
 
@@ -81,21 +83,15 @@ The devtools panel will pick this up and display it under **Component State** al
 
 ## Options
 
-`svelteDevtools()` accepts an optional config object:
-
-```ts
-svelteDevtools({
-  // allowedHosts: ['localhost', '0.0.0.0']  // reserved for future use
-})
-```
+`svelteDevtools()` currently takes no configuration — just call it with no arguments. Options will be added in a future release.
 
 ## Keyboard shortcut
 
 | Shortcut | Action |
 |---|---|
-| `⇧⌥D` / `Shift+Alt+D` | Toggle the devtools panel |
+| `⇧ ⌥ D` / `Shift + Alt + D` | Toggle the devtools panel |
 
-The toggle button is always visible in the bottom-right corner of the page.
+The toggle button is always visible as a pill at the bottom center of the page.
 
 ## Development
 
@@ -106,7 +102,7 @@ cd svelte-devtools
 npm run setup          # installs deps + builds the overlay bundle
 
 # 2. Start the playground
-npm run dev            # http://localhost:5173
+npm run dev            # http://localhost:3001
 
 # 3. Rebuild the overlay after making changes
 npm run build:overlay  # or: npm run dev:overlay (watch mode, use alongside npm run dev)
