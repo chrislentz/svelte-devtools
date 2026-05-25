@@ -13,10 +13,6 @@ export const CSS = `
   }
 
   #__svelte-devtools__ {
-    position: fixed !important;
-    inset: 0 !important;
-    pointer-events: none !important;
-    z-index: 2147483647 !important;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
     font-size: 13px !important;
     line-height: 1.5 !important;
@@ -25,10 +21,11 @@ export const CSS = `
 
   /* ── Toggle button ── */
   .sdt-toggle {
-    position: absolute;
-    bottom: max(20px, calc(env(safe-area-inset-bottom) + 8px));
+    position: fixed;
+    bottom: 20px;
     left: 0;
     right: 0;
+    z-index: 2147483647;
     margin: 0 auto;
     width: fit-content;
     height: 36px;
@@ -70,10 +67,11 @@ export const CSS = `
 
   /* ── Panel wrapper ── */
   .sdt-panel-wrap {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 2147483647;
     pointer-events: auto;
     animation: sdt-slide-up 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
@@ -83,6 +81,7 @@ export const CSS = `
     left: auto;
     bottom: 0;
     right: 0;
+    z-index: 2147483647;
     max-width: 92dvw;
     animation: sdt-slide-right 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }

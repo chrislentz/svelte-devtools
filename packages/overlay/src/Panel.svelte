@@ -67,7 +67,10 @@
     };
 
     const onMouseMove = (e: MouseEvent) => onMove(e.clientY, e.clientX);
-    const onTouchMove = (e: TouchEvent) => onMove(e.touches[0].clientY, e.touches[0].clientX);
+    const onTouchMove = (e: TouchEvent) => {
+      e.preventDefault();
+      onMove(e.touches[0].clientY, e.touches[0].clientX);
+    };
 
     const onEnd = () => {
       document.removeEventListener('mousemove', onMouseMove);
@@ -78,7 +81,7 @@
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onEnd);
-    document.addEventListener('touchmove', onTouchMove, { passive: true });
+    document.addEventListener('touchmove', onTouchMove, { passive: false });
     document.addEventListener('touchend', onEnd);
   }
 </script>

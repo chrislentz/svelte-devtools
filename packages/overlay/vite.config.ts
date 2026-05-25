@@ -17,8 +17,6 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: true,
     minify: false,
-    rollupOptions: {
-      output: { inlineDynamicImports: true },
-    },
+    codeSplitting: false,
   },
 });
