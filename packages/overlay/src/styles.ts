@@ -26,7 +26,7 @@ export const CSS = `
   /* ── Toggle button ── */
   .sdt-toggle {
     position: absolute;
-    bottom: 20px;
+    bottom: max(20px, calc(env(safe-area-inset-bottom) + 8px));
     left: 0;
     right: 0;
     margin: 0 auto;
@@ -83,6 +83,7 @@ export const CSS = `
     left: auto;
     bottom: 0;
     right: 0;
+    max-width: 92dvw;
     animation: sdt-slide-right 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
 
@@ -98,6 +99,7 @@ export const CSS = `
 
   /* ── Panel ── */
   .sdt-panel {
+    container-type: inline-size;
     background: #1e1e2e;
     color: #cdd6f4;
     display: flex;
@@ -138,13 +140,14 @@ export const CSS = `
   }
 
   .sdt-resize-handle:hover { background: rgba(255 62 0 / 0.15); }
+  .sdt-resize-handle, .sdt-resize-handle--right { touch-action: none; }
 
   /* ── Position toggle ── */
   .sdt-position-toggle {
     background: transparent;
     border: none;
     color: #45475a;
-    width: 32px;
+    width: 44px;
     height: 44px;
     cursor: pointer;
     display: flex;
@@ -238,6 +241,14 @@ export const CSS = `
 
   .sdt-close:hover { color: #cdd6f4; background: #1e1e2e; }
 
+  /* ── Narrow panel: hide text labels, tighten spacing ── */
+  @container (max-width: 480px) {
+    .sdt-logo-text { display: none; }
+    .sdt-tab-label { display: none; }
+    .sdt-logo { padding: 0 10px; }
+    .sdt-tab  { padding: 0 10px; }
+  }
+
   /* ── Content area ── */
   .sdt-content {
     flex: 1;
@@ -245,6 +256,8 @@ export const CSS = `
     min-height: 0;
     scrollbar-width: thin;
     scrollbar-color: #313244 transparent;
+    overscroll-behavior: contain;
+    padding-bottom: env(safe-area-inset-bottom);
   }
 
   /* ── Routes tab ── */
@@ -363,11 +376,16 @@ export const CSS = `
     border: none;
     color: #45475a;
     font-size: 10px;
-    width: 14px;
+    width: 28px;
+    height: 28px;
+    margin: -6px -7px -6px -7px;
     cursor: pointer;
     flex-shrink: 0;
     line-height: 1;
     font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .sdt-tag-name    { color: #f38ba8; font-family: monospace; font-size: 12.5px; }
@@ -415,12 +433,17 @@ export const CSS = `
     border: none;
     color: #45475a;
     font-size: 10px;
-    width: 14px;
+    width: 28px;
+    height: 28px;
+    margin: -6px -7px -6px -7px;
     cursor: pointer;
     flex-shrink: 0;
-    line-height: 20px;
+    line-height: 1;
     font-family: monospace;
     padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .sdt-json-toggle--summary { width: auto; color: #6c7086; }

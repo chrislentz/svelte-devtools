@@ -55,26 +55,31 @@
     storageSet('sdt:tab', id);
   }
 
-  function startResize(e: MouseEvent) {
-    const startVal = position === 'bottom' ? e.clientY : e.clientX;
+  function startResize(startClientY: number, startClientX: number) {
     const startSize = position === 'bottom' ? height : width;
-    e.preventDefault();
 
-    const onMove = (e: MouseEvent) => {
+    const onMove = (clientY: number, clientX: number) => {
       const delta = position === 'bottom'
-        ? startVal - e.clientY          // drag up → taller
-        : startVal - e.clientX;         // drag left → wider
+        ? startClientY - clientY        // drag up → taller
+        : startClientX - clientX;       // drag left → wider
       const next = Math.min(900, Math.max(180, startSize + delta));
       onResize(next);
     };
 
-    const onUp = () => {
-      document.removeEventListener('mousemove', onMove);
-      document.removeEventListener('mouseup', onUp);
+    const onMouseMove = (e: MouseEvent) => onMove(e.clientY, e.clientX);
+    const onTouchMove = (e: TouchEvent) => onMove(e.touches[0].clientY, e.touches[0].clientX);
+
+    const onEnd = () => {
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onEnd);
+      document.removeEventListener('touchmove', onTouchMove);
+      document.removeEventListener('touchend', onEnd);
     };
 
-    document.addEventListener('mousemove', onMove);
-    document.addEventListener('mouseup', onUp);
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onEnd);
+    document.addEventListener('touchmove', onTouchMove, { passive: true });
+    document.addEventListener('touchend', onEnd);
   }
 </script>
 
@@ -87,7 +92,8 @@
   <button
     class="sdt-resize-handle"
     class:sdt-resize-handle--right={position === 'right'}
-    onmousedown={startResize}
+    onmousedown={(e) => { e.preventDefault(); startResize(e.clientY, e.clientX); }}
+    ontouchstart={(e) => startResize(e.touches[0].clientY, e.touches[0].clientX)}
     onkeydown={(e) => {
       if (position === 'bottom') {
         if (e.key === 'ArrowUp')   onResize(Math.min(900, height + 20));
@@ -105,9 +111,7 @@
   <div class="sdt-header">
     <div class="sdt-logo" title="Svelte DevTools">
       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 512 512"><path d="M416.9 93.1c-41.1-58.9-122.4-76.3-181.2-38.9L132.5 120c-28.2 17.7-47.6 46.5-53.5 79.3-4.9 27.3-.6 55.5 12.3 80-8.8 13.4-14.9 28.5-17.7 44.2-5.9 33.4 1.8 67.8 21.6 95.4 41.2 58.9 122.4 76.3 181.2 38.9L379.6 392c28.2-17.7 47.6-46.5 53.5-79.3 4.9-27.3.6-55.5-12.3-80 8.8-13.4 14.9-28.4 17.7-44.2 5.8-33.4-1.9-67.8-21.6-95.4" style="fill:#ff3e00"/><path d="M225.6 424.5c-33.3 8.6-68.4-4.4-88-32.6-11.9-16.6-16.5-37.3-13-57.4.6-3.3 1.4-6.5 2.5-9.6l1.9-5.9 5.3 3.9c12.2 9 25.9 15.8 40.4 20.2l3.8 1.2-.4 3.8c-.5 5.4 1 10.9 4.2 15.3 5.9 8.5 16.5 12.4 26.5 9.8 2.2-.6 4.4-1.5 6.3-2.8l103.2-65.8c5.1-3.2 8.6-8.4 9.7-14.4 1.1-6.1-.3-12.3-3.9-17.3-5.9-8.5-16.5-12.4-26.5-9.8-2.2.6-4.4 1.5-6.3 2.8L252 291c-6.5 4.1-13.5 7.2-21 9.2-33.3 8.6-68.4-4.4-88-32.6-11.9-16.6-16.5-37.3-13-57.4 3.5-19.7 15.2-37 32.2-47.7l103.2-65.8c6.5-4.1 13.5-7.2 21-9.2 33.3-8.6 68.4 4.4 88 32.6 11.9 16.6 16.5 37.3 13 57.4-.6 3.3-1.4 6.5-2.5 9.6L383 193l-5.3-3.9c-12.2-9-25.9-15.8-40.4-20.2l-3.8-1.2.4-3.8c.5-5.4-1-10.9-4.2-15.3-5.9-8.5-16.5-12.4-26.5-9.8-2.2.6-4.4 1.5-6.3 2.8l-103.2 65.8c-5.1 3.2-8.6 8.4-9.7 14.4-1.1 6.1.3 12.3 3.9 17.3 5.9 8.5 16.5 12.4 26.5 9.8 2.2-.6 4.4-1.5 6.3-2.8L260 221c6.5-4.1 13.5-7.2 21-9.2 33.3-8.6 68.4 4.4 88 32.6 11.9 16.6 16.5 37.3 13 57.4-3.5 19.7-15.2 37-32.2 47.7l-103.2 65.8c-6.5 4.1-13.6 7.2-21 9.2" style="fill:#fff"/></svg>
-      {#if position === 'bottom'}
-        Svelte DevTools
-      {/if}
+      <span class="sdt-logo-text">Svelte DevTools</span>
     </div>
 
     <div class="sdt-tabs" role="tablist">
@@ -121,9 +125,7 @@
           title={tab.label}
         >
           <span class="sdt-tab-icon">{tab.icon}</span>
-          {#if position === 'bottom'}
-            {tab.label}
-          {/if}
+          <span class="sdt-tab-label">{tab.label}</span>
         </button>
       {/each}
     </div>
