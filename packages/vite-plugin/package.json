@@ -1,6 +1,6 @@
 {
   "name": "@svelte-devtools/vite-plugin",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Vite plugin that adds a development overlay for inspecting Svelte 5 and SvelteKit apps",
   "type": "module",
   "keywords": [
@@ -29,7 +29,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "scripts": {
     "build": "tsc --project tsconfig.build.json && cp ../overlay/dist/overlay.js dist/overlay.js",
